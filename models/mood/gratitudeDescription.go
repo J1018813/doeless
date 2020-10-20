@@ -1,12 +1,17 @@
 package mood
 
-import "time"
+import (
+	"time"
+
+	"gorm.io/gorm"
+)
 
 // GratitudeDescription describes what a user is gratefull for today.
 type GratitudeDescription struct {
-	DateTime    time.Time
-	Title       string
-	Description string
+	gorm.Model
+	DateTime    time.Time `json:"dateTime"`
+	Title       string    `json:"title"`
+	Description string    `json:"description"`
 }
 
 // New returns a new Gratitude description.

@@ -3,17 +3,19 @@ package entry
 import (
 	"time"
 
-	"github.com/j1018813/doeless/pkg/domain/mood"
-	"github.com/j1018813/doeless/pkg/domain/moodimprover"
+	"github.com/j1018813/doeless/models/mood"
+	"github.com/j1018813/doeless/models/moodimprover"
+	"gorm.io/gorm"
 )
 
 // Entry tells you how the user is doing that day.
 type Entry struct {
+	gorm.Model
 	ID                    int
-	DateTime              time.Time
-	GratitudeDescriptions []mood.GratitudeDescription
-	Mood                  mood.Mood
-	Activity              moodimprover.Activity
+	DateTime              time.Time                   `json:"dateTime"`
+	GratitudeDescriptions []mood.GratitudeDescription `json:"gratitudeDescriptions"`
+	Mood                  mood.Mood                   `json:"mood"`
+	Activity              moodimprover.Activity       `json:"activity"`
 }
 
 // New gives you a new Entry.
