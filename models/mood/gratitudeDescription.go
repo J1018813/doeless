@@ -12,6 +12,7 @@ type GratitudeDescription struct {
 	DateTime    time.Time `json:"dateTime"`
 	Title       string    `json:"title"`
 	Description string    `json:"description"`
+	EntryID     uint
 }
 
 // New returns a new Gratitude description.
