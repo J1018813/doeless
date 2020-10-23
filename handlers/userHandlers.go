@@ -1,6 +1,8 @@
 package handlers
 
 import (
+	"fmt"
+
 	"github.com/j1018813/doeless/models/user"
 
 	"github.com/gofiber/fiber/v2"
@@ -37,5 +39,11 @@ func (u *UserHandlers) NewUser(c *fiber.Ctx) error {
 
 	u.userDb.NewUser(user)
 	c.JSON(user)
+	return nil
+}
+
+// AddEntryToUser adds an entry to the given user
+func (u *UserHandlers) AddEntryToUser(c *fiber.Ctx) error {
+	fmt.Fprintf(c, "%s\n", c.Params("name"))
 	return nil
 }

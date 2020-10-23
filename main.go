@@ -37,8 +37,11 @@ func setupRoutes(app *fiber.App) {
 	userDatabase := database.NewUserDatabase(database.Db)
 	userHandlers := handlers.NewUserHandlers(userDatabase)
 
-	app.Get("/users", userHandlers.GetUsers)
-	app.Post("/user", userHandlers.NewUser)
+	v1 := app.Group("/api/v1")
+
+	v1.Get("/users", userHandlers.GetUsers)
+	v1.Post("/users/:name/entry", userHandlers.AddEntryToUser)
+	v1.Post("/user", userHandlers.NewUser)
 }
 
 func main() {

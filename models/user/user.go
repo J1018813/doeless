@@ -8,16 +8,14 @@ import (
 // User is the kind person using this application.
 type User struct {
 	gorm.Model
-	ID      int
 	Name    string         `json:"name"`
 	Email   string         `json:"email"`
 	Entries []*entry.Entry `json:"entries"`
 }
 
 // New creates a new user.
-func New(id int, name string, email string) *User {
+func New(name string, email string) *User {
 	return &User{
-		ID:    id,
 		Name:  name,
 		Email: email,
 	}
