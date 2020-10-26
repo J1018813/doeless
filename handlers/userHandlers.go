@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"fmt"
+	"strconv"
 
 	"github.com/j1018813/doeless/models/user"
 
@@ -25,6 +26,31 @@ func NewUserHandlers(uDb *database.UserDatabase) *UserHandlers {
 func (u *UserHandlers) GetUsers(c *fiber.Ctx) error {
 	users, err := u.userDb.GetUsers()
 	c.JSON(users)
+	return err
+}
+
+// GetUser is the handler method which retrieves user with given id
+func (u *UserHandlers) GetUser(c *fiber.Ctx) error {
+	users, err := u.userDb.GetUsers()
+	if err != nil {
+		return err
+	}
+
+	for _, user := range users {
+		// string to int
+		i, err := strconv.ParseUint(c.Params("id"), 0, 16)
+		if err != nil {
+			// handle error
+			fmt.Println(err)
+			return err
+		}
+
+		if user.ID == uint(i) {
+			c.JSON(user)
+			break
+		}
+	}
+
 	return err
 }
 
